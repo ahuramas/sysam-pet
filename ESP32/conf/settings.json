@@ -1,0 +1,1 @@
+{"feedset":{"language":"ua","manual_servings":"2"},"AP":{"on":0,"ssid":"SysamPet","passwd":"1234"},"WiFi":{"on":1,"ssid":"samchere","passwd":"chereshneva"},"ntp":{"on":1,"url":"pool.ntp.org","timezone":"UTC+02:00","dst":{"on":1}},"MQTT":{"on":0,"broker":"192.168.87.10","port":"1883","pub_root_topic":"metric/<MAC>","pub_cycle":"60"}}

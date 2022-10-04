@@ -1,0 +1,314 @@
+{	
+	"menu":{
+		"0":{
+			"name": "main",
+			"rest": "./api/status",
+			"label":"Головна"
+		},
+		"1":{
+			"name": "profile",
+			"rest": "./conf/profile",
+			"label":"Профіль улюбленця"
+		},
+		"2":{
+			"name": "schedule",
+			"rest": "./conf/schedule",
+			"label":"Розклад годувань"
+		},
+		"3":{
+			"name": "settings",
+			"rest": "./conf/settings",
+			"label":"Налаштування"
+		},
+		"4":{
+			"name": "info",
+			"rest": "./api/info",
+			"label":"Про годівничку"
+		}
+	},
+	"main": {
+		"datatime":{
+			"label": "Дата та час",
+			"type": "timest",
+			"perm": "r"
+		},
+		"led": {
+			"label": "Підсвітка тарілки",
+			"type": "switch",
+			"perm": "rw",
+			"onclick": "sendCMD('led')"
+		},
+		"cametime": {
+			"label": "Останя активність біля тарілки",
+			"type": "timest",
+			"perm": "r"
+		},
+		"remnant":{
+			"label": "Залишок корму в тарілці",
+			"type": "text",
+			"perm": "r"
+		},
+		"nextfeed": {
+			"label": "Наступне годування",
+			"type": "timest",
+			"perm": "r"
+		},
+		"supply":{
+			"label": "Запас корму",
+			"type": "text",
+			"perm": "r"
+		},
+		"temperature": {
+			"label": "Температура",
+			"type": "text",
+			"perm": "r"
+		},
+		"humidity": {
+			"label": "Вологість",
+			"type": "text",
+			"perm": "r"
+		},
+		"buttons":{
+			"class": "",
+			"data":[
+				{"label": "Насипати порцію",
+				"onclick": "sendCMD('feed')",
+				"img": "pet_food.svg"}
+			]
+		}
+	},
+	"profile":{
+		"species":{
+			"label": "Вид тварини",
+			"type": "select",
+			"data": {
+				"0": "- виберіть вид -",
+				"dog": "собака",
+				"cat": "кіт"
+			}
+		},
+		"breed": {
+			"label": "Порода",
+			"type": "text"
+		}, 
+		"petname":{
+			"label": "Кличка",
+			"type": "text"
+		},
+		"birthday": {
+			"label": "Дата народження",
+			"type": "date"
+		}
+	},
+	"schedule":{
+		"type": "switch",
+		"sett":{
+			"title": {
+				"label": "Назва",
+				"type": "text",
+				"perm": "rw"
+			},
+			"ftime":{
+				"label": "Час",
+				"type": "time",
+				"max": "23:59",
+				"min": "00:00",
+				"perm": "rw"
+			},
+			"wd": {
+				"label": "Дні тижня",
+				"type": "checkbox",
+				"data":{
+					"0":"Пн",
+					"1":"Вт",
+					"2":"Ср",
+					"3":"Чт",
+					"4":"Пт",
+					"5":"Сб",
+					"6":"Нд"},
+				"perm": "rw"
+			},
+			"portion":{
+				"label": "Розмір порції",
+				"type": "number",
+				"min": 1,
+				"perm": "rw"
+			}
+		},
+		"buttons":{
+			"class": "cmd inline",
+			"data":[
+				{
+				"label": "Зберегти",
+				"onclick": "sendData(this)"
+				},
+				{
+				"label": "Видалити",
+				"onclick": "delData(this)"
+				},
+				{
+				"label": "Відмінити",
+				"onclick": "createActivity()"
+				}
+			]
+		}
+	},
+	"settings":{
+		"feedset":{
+			"label": "Загальні",
+			"sett":{
+				"language":{
+					"label": "Мова",
+					"type": "select",
+					"data": {
+						"ua": "Ukrainian",
+						"en": "English"
+					}
+				},
+				"manual_servings":{
+					"label": "Розмір порції ручного годування",
+					"type": "number",
+					"min": 1,
+					"max": 10
+				}
+			},
+			"buttons":{
+				"class": "cmd inline",
+				"data":[
+					{
+					"label": "Зберегти",
+					"onclick": "sendData(this)"
+					},
+					{
+						"label": "Відмінити",
+						"onclick": "createActivity()"
+					},
+					{
+					"label": "Тарувати",
+					"onclick": "sendCMD('tare')"
+					}
+				]
+			}
+		},
+		"AP":{
+			"label": "WiFi AP",
+			"type": "switch",
+			"sett":{
+				"ssid":{
+					"label": "Назва точки доступу (SSID)",
+					"type": "text"
+				}
+			}
+		},
+		"WiFi":{
+			"label": "Wi-Fi",
+			"type": "switch",
+			"sett":{
+				"ssid":{
+					"label": "Назва точки доступу (SSID)",
+					"type": "text",
+					"perm": "rw"
+				},
+				"passwd": {
+					"label": "Пароль",
+					"type": "password",
+					"perm": "w"
+				}
+			}
+		},
+		"ntp":{
+			"label": "Network time",
+			"type": "switch",
+			"sett":{
+				"url":{
+					"label": "NTP server",
+					"type": "url",
+					"perm": "rw"
+				},
+				"timezone":{
+					"label": "Часовий пояс",
+					"type": "text",
+					"perm": "rw"
+				},
+				"dst": {
+					"label": "Літній час",
+					"type": "switch",
+					"perm": "rw"
+				}
+			}
+		},
+		"MQTT":{
+			"label": "MQTT Client",
+			"type": "switch",
+			"sett":{
+				"broker":{
+					"label": "MQTT broker (URL or IP)",
+					"type": "url"
+				},
+				"port":{
+					"label": "port",
+					"type": "number"
+				},
+				"pub_root_topic":{
+					"label": "Root topic",
+					"type": "text"
+				},
+				"pub_cycle": {
+					"label": "Interval of publication [s]",
+					"type": "number",
+					"min": 10,
+					"max": 300
+				}
+			}
+		}
+	},
+	"info":{
+		"model":{
+			"label": "Model",
+			"type": "text",
+			"perm": "r"
+		},
+		"mac":{
+			"label": "MAC",
+			"type": "text",
+			"perm": "r"
+		},
+		"ip":{
+			"label": "IP",
+			"type": "text",
+			"perm": "r"
+		},
+		"fw":{
+			"label": "Firmware",
+			"type": "text",
+			"perm": "r"
+		},
+		"buttons":{
+			"class": "cmd inline",
+			"data":[
+				{
+					"label": "Reboot",
+					"onclick": "sendCMD('reboot')"
+					},
+				{
+					"label": "Factory reset",
+					"onclick": "sendCMD('reset')"
+				}
+			]
+		}
+	},
+
+	"buttons":{
+		"class": "cmd inline",
+		"data":[
+			{
+			"label": "Зберегти",
+			"onclick": "sendData(this)"
+			},
+			{
+			"label": "Відмінити",
+			"onclick": "createActivity()"
+			}
+		]
+	}
+}
