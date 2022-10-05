@@ -4,7 +4,7 @@
 import requests
 import os
 
-sourcdir = '../master/'
+sourcdir = '../ESP32/'
 upload_dir = ['app', 'www']
 
 

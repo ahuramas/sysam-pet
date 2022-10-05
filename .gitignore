@@ -1,1 +1,5 @@
+.gitignore
 _DOCS_/
+develop/log/
+develop/app/__pycache__/
+note/
