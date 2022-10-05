@@ -1,0 +1,49 @@
+{
+	"main": {
+		"nextfeed": "Next feed",
+		"remainder": "Запас корму",
+		"plet": "Залишок корму в тарілці",
+		"lastapproach": "Last approach",
+		"approaches": "Daily approaches",
+		"temperature": "Temperature",
+		"humidity": "Humidity",
+		"time": "Date Time"
+	},
+	"profile":{
+		"name": "Кличка",
+		"type": "Вид",
+		"breed": "Порода",
+		"birthday": "Дата народження"
+	},
+	"schedule":{
+		"title": "Назва",
+		"weekday": ["Пн","Вт","Ср","Чт","Пт","Сб","Нд"],
+		"portion": "Розмір порції"
+	},
+	"settings":{
+		"Network":{
+			"title": "Wi-Fi",
+			"ssid": "Назва точки доступу",
+			"passwd": "Пароль"
+		},
+		"ntp":{
+			"title": "Дата Час",
+			"timezone": "Часова зона",
+			"dst": "Літній час"
+		},
+		"MQTT":{
+			"title": "MQTT",
+			"broker": "Broker URL or IP",
+			"port": "Порт",
+			"pub_root_topic": "Кренева метрика",
+			"pub_cycle": "Інтервал публікації [s]"
+		},
+		"feedset":{
+			"title": "Загальні налаштування",
+			"language": "Defalt language",
+			"manual_servings": "Розмір порції ручного годування"
+		}
+	},
+	"telegrambot":{},
+	"log":{}
+}
