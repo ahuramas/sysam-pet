@@ -41,7 +41,7 @@ class Net():
 				self.wlan.connect(conf['ssid'], conf['passwd'])
 				self.led.value(not self.led.value)
 			ifconf['ip'] = self.wlan.ifconfig()[0]
-			# print('WiFi connacted (ip %s)'% ifconf['ip'])
+			print('WiFi connacted (ip %s)'% ifconf['ip'])
 		else:
 			self.wlan.active(False)
 		ifconf['is'] = self.wlan.isconnected()
@@ -50,13 +50,13 @@ class Net():
 
 	def ntpSynch(self, conf):
 		ntptime.host = conf['url']
-		utc = conf['timezone']
-		hh, mm = utc[4:].split(":")
-		if utc[3] == '+':
-			dtc = (int(hh)*60 + int(mm))*60
-		else:
-			dtc = -(int(hh)*60 + int(mm))*60
-		dtc += 3600*int(conf['dst']["1"])
+		dtc = 3600*int(conf['dst']['on'])
+		# utc = conf['timezone']
+		# hh, mm = utc[4:].split(":")
+		# if utc[3] == '+':
+		# 	dtc += (int(hh)*60 + int(mm))*60
+		# else:
+		# 	dtc -= (int(hh)*60 + int(mm))*60
 		try:
 			ntptime.settime()
 			# print("UTC time: ", str(time.localtime()))

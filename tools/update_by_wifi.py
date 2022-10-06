@@ -19,14 +19,6 @@ def subDirScan(subDir):
 			files.append(subDir + '/' + subfile)
 	return files
 
-
-filelist =[]
-
-for mdir in os.listdir(sourcdir):
-	if upload_dir.count(mdir):
-		filelist.extend(subDirScan(mdir))
-
-print("Found %s files to send"%(len(filelist)))
 ip = input('Input devace IP: ')
 
 url = 'http://%s'%(ip)
@@ -38,6 +30,14 @@ except:
 	print('FAILED')
 	exit()
 print('OK')
+
+filelist =[]
+
+for mdir in os.listdir(sourcdir):
+	if upload_dir.count(mdir) and input('Send files from /%s/? (y/n) '%(mdir)) == 'y':
+		filelist.extend(subDirScan(mdir))
+
+print("Found %s files to send"%(len(filelist)))
 url = 'http://%s/apt'%(ip)
 for file_name in filelist:
 	url_file = '%s/%s'%(url, file_name.replace('/', '+'))
@@ -46,3 +46,7 @@ for file_name in filelist:
 	with open(path_file, 'rb') as f:
 		r = requests.post(url_file, data=f.read())
 	print(r.text)
+
+if input('Reboot devace (y/n): ') == 'y':
+	url = 'http://%s/api/cmd/reboot'%(ip)
+	r = requests.get(url)

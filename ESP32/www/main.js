@@ -317,12 +317,12 @@ function creatBrick(name_arr, obj, data){
 		bricksLine += `<input type="text" name="${inpname}" ${lock} value="`;
 		if (data.title != 'cron' && data.time != undefined){
 			let datetime = new Date(data.time * 1000);
-			let yy = "0" + datetime.getFullYear();
-			let mn = "0" + datetime.getMonth()+1;
+			let yy = "0" + (datetime.getFullYear()+30);
+			let mn = "0" + (datetime.getMonth()+1);
 			let dd = "0" + datetime.getDate();
 			let hh = "0" + datetime.getHours();
-			let mi = "0" + datetime.getMinutes();
-			bricksLine += `${yy.substr(-4)}.${mn.substr(-2)}.${dd.substr(-2)} ${hh.substr(-2)}:${mi.substr(-2)}`;
+			let mm = "0" + datetime.getMinutes();
+			bricksLine += `${yy.substr(-4)}.${mn.substr(-2)}.${dd.substr(-2)} ${hh.substr(-2)}:${mm.substr(-2)}`;
 			if (data.title){bricksLine += ` - ${data.title}`;}
 		}
 		bricksLine += '"></input>';
@@ -330,7 +330,7 @@ function creatBrick(name_arr, obj, data){
 	else if (obj.type == "switch"){
 		let imgname = 'off.svg';
 		if (data['on'] == 1){imgname = 'on.svg';}
-		bricksLine += `<img class="form button smoll" onclick="channgSwitch(this)" alt="${data['on']}" name="${inpname}" src="${imgname}">`;
+		bricksLine += `<img class="form button smoll" onclick="${obj['onclick']}" alt="${data['on']}" name="${inpname}" src="${imgname}">`;
 	}
 	else{
 		bricksLine +=`<input type="${obj.type}" name="${inpname}" `;

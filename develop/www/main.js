@@ -330,7 +330,7 @@ function creatBrick(name_arr, obj, data){
 	else if (obj.type == "switch"){
 		let imgname = 'off.svg';
 		if (data['on'] == 1){imgname = 'on.svg';}
-		bricksLine += `<img class="form button smoll" onclick="channgSwitch(this)" alt="${data['on']}" name="${inpname}" src="${imgname}">`;
+		bricksLine += `<img class="form button smoll" onclick="${obj['onclick']}" alt="${data['on']}" name="${inpname}" src="${imgname}">`;
 	}
 	else{
 		bricksLine +=`<input type="${obj.type}" name="${inpname}" `;

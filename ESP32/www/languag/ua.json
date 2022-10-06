@@ -35,8 +35,8 @@
 		"led": {
 			"label": "Підсвітка тарілки",
 			"type": "switch",
-			"perm": "rw",
-			"onclick": "sendCMD('led')"
+			"onclick": "sendCMD('led')",
+			"perm": "rw"
 		},
 		"cametime": {
 			"label": "Останя активність біля тарілки",
@@ -102,6 +102,7 @@
 	},
 	"schedule":{
 		"type": "switch",
+		"onclick": "channgSwitch(this)",
 		"sett":{
 			"title": {
 				"label": "Назва",
@@ -176,16 +177,16 @@
 				"class": "cmd inline",
 				"data":[
 					{
-					"label": "Зберегти",
-					"onclick": "sendData(this)"
+						"label": "Зберегти",
+						"onclick": "sendData(this)"
 					},
 					{
 						"label": "Відмінити",
 						"onclick": "createActivity()"
 					},
 					{
-					"label": "Тарувати",
-					"onclick": "sendCMD('tare')"
+						"label": "Тарувати",
+						"onclick": "sendCMD('tare')"
 					}
 				]
 			}
@@ -193,6 +194,7 @@
 		"AP":{
 			"label": "WiFi AP",
 			"type": "switch",
+			"onclick": "channgSwitch(this)",
 			"sett":{
 				"ssid":{
 					"label": "Назва точки доступу (SSID)",
@@ -203,6 +205,7 @@
 		"WiFi":{
 			"label": "Wi-Fi",
 			"type": "switch",
+			"onclick": "channgSwitch(this)",
 			"sett":{
 				"ssid":{
 					"label": "Назва точки доступу (SSID)",
@@ -219,6 +222,7 @@
 		"ntp":{
 			"label": "Network time",
 			"type": "switch",
+			"onclick": "channgSwitch(this)",
 			"sett":{
 				"url":{
 					"label": "NTP server",
@@ -233,6 +237,7 @@
 				"dst": {
 					"label": "Літній час",
 					"type": "switch",
+					"onclick": "channgSwitch(this)",
 					"perm": "rw"
 				}
 			}
@@ -240,6 +245,7 @@
 		"MQTT":{
 			"label": "MQTT Client",
 			"type": "switch",
+			"onclick": "channgSwitch(this)",
 			"sett":{
 				"broker":{
 					"label": "MQTT broker (URL or IP)",

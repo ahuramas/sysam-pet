@@ -11,10 +11,12 @@ def readSettings():
 	except:
 		print('no unit settings')
 
-# створення наступної задачі
+# створення розкладу задач на добу
 def taskCreate():
+
 	time_now = time.time()
 	print('time: ', time_now)
+
 	# читаємо розклад годувань
 	try:
 		f = open('conf/schedule.json', 'r')
@@ -28,10 +30,11 @@ def taskCreate():
 		return {'title':'cron', 'time': time_now+600}
 
 	tm = time.localtime()
+
 	# for uPython
 	midnight = time.mktime((tm[0], tm[1], tm[2], 0, 0, 0, tm[6], tm[7]))
 	wdtask = tm[6]
-		
+	
 	# for cPython
 	# temp = time.strftime("%Y-%m-%d", tm)
 	# midnight = time.mktime(time.strptime(temp, "%Y-%m-%d"))
@@ -41,8 +44,15 @@ def taskCreate():
 	next_task = {}
 	for key in tasksDict:
 		task = tasksDict[key]
-		time_task = int(midnight) + (60*int(task['hh']) + int(task['mm']))*60
-		if time_task <= time_now:
+		if task['on'] == 0:
+			continue
+
+		hh, mm = task['ftime'].split(':')
+		time_task = int(midnight) + (60*int(hh) + int(mm))*60
+		
+		print(task['title'], time_task)
+
+		if time_task < time_now:
 			time_task += 86400
 			wdtask += 1
 			if wdtask > 6:
@@ -51,17 +61,16 @@ def taskCreate():
 		if not task['wd'][str(wdtask)]:
 			continue
 
-		if next_task.get('title') == None or time_task < next_task.get('time'):
+		if next_task.get('time') == None or time_task < next_task.get('time'):
 			next_task = {
 				'title': task['title'],
 				'time': time_task,
-				'portion': int(task['portion'])
+			'portion': int(task['portion'])
 			}
-		
+	
 	if not next_task:
 		return {'title':'cron', 'time': time_now+600}
-	else:
-		return next_task
+	return next_task
 
 # профіль улюбленця
 def proPet():
